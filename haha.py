@@ -19,6 +19,8 @@ def query_postgreSQL(query):
 
     return query_result
 
+
+@st.experimental_memo(ttl=1)
 def read_db(table, colum='*', schema='public'):
     query = f'SELECT {colum} FROM {schema}."{table}"'
     return query
