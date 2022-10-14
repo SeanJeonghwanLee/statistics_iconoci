@@ -32,7 +32,7 @@ def func_content(pct, allvals):
 
 explode = (0.01, 0)
 
-dd = dt.datetime.now()
+dd = dt.datetime.now() + timedelta(hours=9)
 
 st.title('Statistics of ICONOCI')
 
