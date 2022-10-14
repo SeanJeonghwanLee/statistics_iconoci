@@ -82,12 +82,12 @@ col0_1.pyplot(fig_acc)
 col0_2.header(f'Total Users : {len(user_df)} (14)')
 col0_2.text(f'Total Activities : {total_num_queries} \nTotal Generation : {len(generation_df)} \nTotal Artify : {len(artify_df)} \nTotal Search : {len(search_df)}')
 
-fig_acc.savefig(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Accumulated Counts of Generation Query {dd.year}-{dd.month}-{dd.day}.png')
-with open(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Accumulated Counts of Generation Query {dd.year}-{dd.month}-{dd.day}.png', "rb") as file:
+fig_acc.savefig(f'Accumulated Counts of Generation Query {dd.year}-{dd.month}-{dd.day}.png')
+with open(f'Accumulated Counts of Generation Query {dd.year}-{dd.month}-{dd.day}.png', "rb") as file:
     btn = col0_2.download_button(
             label="Download image",
             data=file,
-            file_name=f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Accumulated Counts of Generation Query {dd.year}-{dd.month}-{dd.day}.png',
+            file_name=f'Accumulated Counts of Generation Query {dd.year}-{dd.month}-{dd.day}.png',
             mime="image/png"
         )
 
@@ -116,12 +116,12 @@ with st.expander('See Charts'):
         ax_q.text(rect.get_x() + rect.get_width()/2.0, height, '%.1f' % height, ha='center', va='bottom', size = 8)
     st.pyplot(fig_q)
 
-    fig_q.savefig(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Top 10 queries {dd.year}-{dd.month}-{dd.day} {dd.hour}-{dd.minute}.png', bbox_inches = 'tight')
-    with open(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Top 10 queries {dd.year}-{dd.month}-{dd.day} {dd.hour}-{dd.minute}.png', "rb") as file:
+    fig_q.savefig(f'Top 10 queries {dd.year}-{dd.month}-{dd.day} {dd.hour}-{dd.minute}.png', bbox_inches = 'tight')
+    with open(f'Top 10 queries {dd.year}-{dd.month}-{dd.day} {dd.hour}-{dd.minute}.png', "rb") as file:
         btn = st.download_button(
                 label="Download image",
                 data=file,
-                file_name=f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Top 10 queries {dd.year}-{dd.month}-{dd.day} {dd.hour}-{dd.minute}.png',
+                file_name=f'Top 10 queries {dd.year}-{dd.month}-{dd.day} {dd.hour}-{dd.minute}.png',
                 mime="image/png"
             )
 
@@ -142,12 +142,12 @@ with st.expander('See Charts'):
     plt.title(f'Ratio of Generation to Artify \n (total: {total_num_gen_art_df})')
     col2_1.pyplot(fig_nga)
 
-    fig_nga.savefig(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Generation to Artify (total: {total_num_gen_art_df}).png')
-    with open(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Generation to Artify (total: {total_num_gen_art_df}).png', "rb") as file:
+    fig_nga.savefig(f'Ratio of Generation to Artify (total: {total_num_gen_art_df}).png')
+    with open(f'Ratio of Generation to Artify (total: {total_num_gen_art_df}).png', "rb") as file:
         btn = col2_1.download_button(
                 label="Download image",
                 data=file,
-                file_name=f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts//Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Generation to Artify (total: {total_num_gen_art_df}).png',
+                file_name=f'Ratio of Generation to Artify (total: {total_num_gen_art_df}).png',
                 mime="image/png"
             )
 
@@ -171,12 +171,12 @@ with st.expander('See Charts'):
     plt.title(f'Ratio of Registered to Unregistered users in artify \n (total: {total_num_reg_artify_df})')
     col1_1.pyplot(fig_ra)
 
-    fig_ra.savefig(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Registered to Unregistered users in artify (total: {total_num_reg_artify_df}).png')
-    with open(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Registered to Unregistered users in artify (total: {total_num_reg_artify_df}).png', "rb") as file:
+    fig_ra.savefig(f'Ratio of Registered to Unregistered users in artify (total: {total_num_reg_artify_df}).png')
+    with open(f'Ratio of Registered to Unregistered users in artify (total: {total_num_reg_artify_df}).png', "rb") as file:
         btn = col1_1.download_button(
                 label="Download image",
                 data=file,
-                file_name=f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Registered to Unregistered users in artify (total: {total_num_reg_artify_df}).png',
+                file_name=f'Ratio of Registered to Unregistered users in artify (total: {total_num_reg_artify_df}).png',
                 mime="image/png"
             )
 
@@ -196,12 +196,12 @@ with st.expander('See Charts'):
     col1_2.pyplot(fig_rg)
 
 
-    fig_rg.savefig(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Registered to Unregistered users in generation (total: {total_num_reg_generation_df}).png')
-    with open(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Registered to Unregistered users in generation (total: {total_num_reg_generation_df}).png', "rb") as file:
+    fig_rg.savefig(f'Ratio of Registered to Unregistered users in generation (total: {total_num_reg_generation_df}).png')
+    with open(f'Ratio of Registered to Unregistered users in generation (total: {total_num_reg_generation_df}).png', "rb") as file:
         btn = col1_2.download_button(
                 label="Download image",
                 data=file,
-                file_name=f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Registered to Unregistered users in generation (total: {total_num_reg_generation_df}).png',
+                file_name=f'Ratio of Registered to Unregistered users in generation (total: {total_num_reg_generation_df}).png',
                 mime="image/png"
             )
 
@@ -225,11 +225,11 @@ with st.expander('See Charts'):
     plt.title(f'Ratio of "Reached out to Artify" to "Only Generation" \n (total: {total_num_generation})')
     col4_1.pyplot(fig_rraog)
 
-    fig_rraog.savefig(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of "Reached out to Artify" to "Only Generation" (total: {total_num_generation}).png')
-    with open(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of "Reached out to Artify" to "Only Generation" (total: {total_num_generation}).png', 'rb') as file:
+    fig_rraog.savefig(f'Ratio of "Reached out to Artify" to "Only Generation" (total: {total_num_generation}).png')
+    with open(f'Ratio of "Reached out to Artify" to "Only Generation" (total: {total_num_generation}).png', 'rb') as file:
         btn = st.download_button(label="Download image",
             data=file,
-            file_name=f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of "Reached out to Artify" to "Only Generation" (total: {total_num_generation}).png',
+            file_name=f'Ratio of "Reached out to Artify" to "Only Generation" (total: {total_num_generation}).png',
             mime="image/png"
         )
 
@@ -249,12 +249,12 @@ with st.expander('See Charts'):
     plt.title(f'Ratio of Download from Generation \n (total: {len(generation_df)})')
     col3_1.pyplot(fig_dl_gen)
 
-    fig_dl_gen.savefig(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Download from Generation (total: {len(generation_df)}).png')
-    with open(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Download from Generation (total: {len(generation_df)}).png', 'rb') as file:
+    fig_dl_gen.savefig(f'Ratio of Download from Generation (total: {len(generation_df)}).png')
+    with open(f'Ratio of Download from Generation (total: {len(generation_df)}).png', 'rb') as file:
         btn = col3_1.download_button(
                 label="Download image",
                 data=file,
-                file_name=f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Download from Generation (total: {len(generation_df)}).png',
+                file_name=f'Ratio of Download from Generation (total: {len(generation_df)}).png',
                 mime="image/png"
             )
 
@@ -267,11 +267,11 @@ with st.expander('See Charts'):
     plt.title(f'Ratio of Download from Search \n (total: {len(search_df)})')
     col3_2.pyplot(fig_dl_src)
 
-    fig_dl_src.savefig(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Download from Search (total: {len(search_df)}).png')
-    with open(f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Download from Search (total: {len(search_df)}).png', 'rb') as file:
+    fig_dl_src.savefig(f'Ratio of Download from Search (total: {len(search_df)}).png')
+    with open(f'Ratio of Download from Search (total: {len(search_df)}).png', 'rb') as file:
         btn = col3_2.download_button(
                 label="Download image",
                 data=file,
-                file_name=f'/Users/sean_forhim/Desktop/OnomaAI/iconoci/db_visualization/charts/Ratio of Download from Search (total: {len(search_df)}).png',
+                file_name=f'Ratio of Download from Search (total: {len(search_df)}).png',
                 mime="image/png"
             )
