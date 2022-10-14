@@ -58,17 +58,35 @@ today = date.today()
 diff = (today.weekday() - 5) % 7
 last_sat = today - timedelta(days=diff)
 
-acc_count_0 = query_postgreSQL(read_date_db('IconGenerationRequest',today + timedelta(days=1)))
-acc_count_1 = query_postgreSQL(read_date_db('IconGenerationRequest',last_sat))
-acc_count_2 = query_postgreSQL(read_date_db('IconGenerationRequest',last_sat - timedelta(days=7)))
-acc_count_3 = query_postgreSQL(read_date_db('IconGenerationRequest',last_sat - timedelta(days=7*2)))
-acc_count_4 = query_postgreSQL(read_date_db('IconGenerationRequest',last_sat - timedelta(days=7*3)))
+acc_gen_count_0 = query_postgreSQL(read_date_db('IconGenerationRequest',today + timedelta(days=1)))
+acc_gen_count_1 = query_postgreSQL(read_date_db('IconGenerationRequest',last_sat))
+acc_gen_count_2 = query_postgreSQL(read_date_db('IconGenerationRequest',last_sat - timedelta(days=7)))
+acc_gen_count_3 = query_postgreSQL(read_date_db('IconGenerationRequest',last_sat - timedelta(days=7*2)))
+acc_gen_count_4 = query_postgreSQL(read_date_db('IconGenerationRequest',last_sat - timedelta(days=7*3)))
+
+acc_art_count_0 = query_postgreSQL(read_date_db('ArtifyRequest',today + timedelta(days=1)))
+acc_art_count_1 = query_postgreSQL(read_date_db('ArtifyRequest',last_sat))
+acc_art_count_2 = query_postgreSQL(read_date_db('ArtifyRequest',last_sat - timedelta(days=7)))
+acc_art_count_3 = query_postgreSQL(read_date_db('ArtifyRequest',last_sat - timedelta(days=7*2)))
+acc_art_count_4 = query_postgreSQL(read_date_db('ArtifyRequest',last_sat - timedelta(days=7*3)))
+
+acc_src_count_0 = query_postgreSQL(read_date_db('IconSearchRequest',today + timedelta(days=1)))
+acc_src_count_1 = query_postgreSQL(read_date_db('IconSearchRequest',last_sat))
+acc_src_count_2 = query_postgreSQL(read_date_db('IconSearchRequest',last_sat - timedelta(days=7)))
+acc_src_count_3 = query_postgreSQL(read_date_db('IconSearchRequest',last_sat - timedelta(days=7*2)))
+acc_src_count_4 = query_postgreSQL(read_date_db('IconSearchRequest',last_sat - timedelta(days=7*3)))
+
+acc_count_0 = acc_gen_count_0['count'][0] + acc_art_count_0['count'][0] + acc_src_count_0['count'][0]
+acc_count_1 = acc_gen_count_1['count'][0] + acc_art_count_1['count'][0] + acc_src_count_1['count'][0]
+acc_count_2 = acc_gen_count_2['count'][0] + acc_art_count_2['count'][0] + acc_src_count_2['count'][0]
+acc_count_3 = acc_gen_count_3['count'][0] + acc_art_count_3['count'][0] + acc_src_count_3['count'][0]
+acc_count_4 = acc_gen_count_4['count'][0] + acc_art_count_4['count'][0] + acc_src_count_4['count'][0]
 
 labels_acc = [str(last_sat - timedelta(days=22)), str(last_sat - timedelta(days=15)), str(last_sat - timedelta(days=8)), str(last_sat - timedelta(days=1)), str(today)+'\nTODAY']
-sizes_acc = [(acc_count_4['count'][0]), acc_count_3['count'][0], acc_count_2['count'][0], acc_count_1['count'][0], acc_count_0['count'][0]]
+sizes_acc = [acc_count_4, acc_count_3, acc_count_2, acc_count_1, acc_count_0]
 
 fig_acc, ax_acc = plt.subplots()
-plt.title('Accumulated Counts of Generation Query')
+plt.title('Accumulated Counts of Total Activities')
 plt.plot(labels_acc, sizes_acc, marker='o')
 ax_acc.spines['right'].set_visible(False)
 ax_acc.spines['top'].set_visible(False)
@@ -82,12 +100,12 @@ col0_1.pyplot(fig_acc)
 col0_2.header(f'Total Users : {len(user_df)} (14)')
 col0_2.text(f'Total Activities : {total_num_queries} \nTotal Generation : {len(generation_df)} \nTotal Artify : {len(artify_df)} \nTotal Search : {len(search_df)}')
 
-fig_acc.savefig(f'Accumulated Counts of Generation Query {dd.year}-{dd.month}-{dd.day}.png')
-with open(f'Accumulated Counts of Generation Query {dd.year}-{dd.month}-{dd.day}.png', "rb") as file:
+fig_acc.savefig(f'Accumulated Counts of Total Activities {dd.year}-{dd.month}-{dd.day}.png')
+with open(f'Accumulated Counts of Total Activities {dd.year}-{dd.month}-{dd.day}.png', "rb") as file:
     btn = col0_2.download_button(
             label="Download image",
             data=file,
-            file_name=f'Accumulated Counts of Generation Query {dd.year}-{dd.month}-{dd.day}.png',
+            file_name=f'Accumulated Counts of Total Activities {dd.year}-{dd.month}-{dd.day}.png',
             mime="image/png"
         )
 
