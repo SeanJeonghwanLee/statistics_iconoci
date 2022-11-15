@@ -175,9 +175,6 @@ for i in range(len(labels_acc)):
     plt.text(labels_acc[i], height + 5, '%.0f' %height, ha='center', va='bottom', size = 12)
 col0_1.pyplot(fig_acc)
 
-col0_2.header(f'Total Users : {len(user_df)} (14)')
-col0_2.text(f'Total Activities : {total_num_queries} \nTotal Generation : {len(generation_df)} \nTotal Artify : {len(artify_df)} \nTotal Search : {len(search_df)}')
-
 fig_acc.savefig(f'Accumulated Counts of Total Activities {dd.year}-{dd.month}-{dd.day}.png')
 with open(f'Accumulated Counts of Total Activities {dd.year}-{dd.month}-{dd.day}.png', "rb") as file:
     btn = col0_2.download_button(
