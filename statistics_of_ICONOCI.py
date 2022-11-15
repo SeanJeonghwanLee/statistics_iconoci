@@ -119,7 +119,7 @@ for i in range(len(labels_day)):
 col0_1.pyplot(fig_day)
 
 col0_2.header(f'Total Users : {len(user_df)} (before the event 89(14))')
-col0_2.text(f'.\n\n\n\n\n\n\n\nToday Activities: {day_count_0}')
+col0_2.text(f'.\n\n\n\nToday Activities: {day_count_0}')
 
 fig_day.savefig(f'Total Activity Counts per Day {dd.year}-{dd.month}-{dd.day}.png')
 with open(f'Total Activity Counts per Day {dd.year}-{dd.month}-{dd.day}.png', "rb") as file:
