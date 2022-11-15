@@ -17,6 +17,12 @@ def query_postgreSQL(query):
     conn.close()
     return query_result
 
+def query_postgreSQL2(query):
+    conn = pg.connect(host='mkyu-event-db.c0jviigby9cu.ap-northeast-2.rds.amazonaws.com', dbname='postgres', user='onoma_mkyu', password='gvqxMbEBphswF8Mx*hLE', port = 5432)
+    query_result = pd.read_sql(query, conn)
+    conn.close()
+    return query_result
+
 def read_db(table, colum='*', schema='public'):
     query = f'SELECT {colum} FROM {schema}."{table}"'
     return query
@@ -48,13 +54,85 @@ artify_df = query_postgreSQL(artify_query)
 search_query = read_db(table='IconSearchRequest')
 search_df = query_postgreSQL(search_query)
 total_num_queries = len(generation_df) + len(artify_df) + len(search_df)
-
+event_query = read_db(table='BgArtifyRequest')
+event_df = query_postgreSQL2(event_query)
 
 col0_1, col0_2 = st.columns(2)
 col0_1.header(f'{dd.year}-{dd.month}-{dd.day} {dd.hour}:{dd.minute}')
 
+#activation counts for recent 7 days
+today = date.today() - timedelta(days=1)
+gen_count_0 = query_postgreSQL(f'''select count(*) from public."IconGenerationRequest" where '{today} 15:00:00' < "timestamp" and "timestamp" < '{today + timedelta(days=1)} 15:00:00';''')
+gen_count_1 = query_postgreSQL(f'''select count(*) from public."IconGenerationRequest" where '{today - timedelta(days=1)} 15:00:00' < "timestamp" and "timestamp" < '{today} 15:00:00';''')
+gen_count_2 = query_postgreSQL(f'''select count(*) from public."IconGenerationRequest" where '{today - timedelta(days=2)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=1)} 15:00:00';''')
+gen_count_3 = query_postgreSQL(f'''select count(*) from public."IconGenerationRequest" where '{today - timedelta(days=3)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=2)} 15:00:00';''')
+gen_count_4 = query_postgreSQL(f'''select count(*) from public."IconGenerationRequest" where '{today - timedelta(days=4)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=3)} 15:00:00';''')
+gen_count_5 = query_postgreSQL(f'''select count(*) from public."IconGenerationRequest" where '{today - timedelta(days=5)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=4)} 15:00:00';''')
+gen_count_6 = query_postgreSQL(f'''select count(*) from public."IconGenerationRequest" where '{today - timedelta(days=6)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=5)} 15:00:00';''')
+
+art_count_0 = query_postgreSQL(f'''select count(*) from public."ArtifyRequest" where '{today} 15:00:00' < "timestamp" and "timestamp" < '{today + timedelta(days=1)} 15:00:00';''')
+art_count_1 = query_postgreSQL(f'''select count(*) from public."ArtifyRequest" where '{today - timedelta(days=1)} 15:00:00' < "timestamp" and "timestamp" < '{today} 15:00:00';''')
+art_count_2 = query_postgreSQL(f'''select count(*) from public."ArtifyRequest" where '{today - timedelta(days=2)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=1)} 15:00:00';''')
+art_count_3 = query_postgreSQL(f'''select count(*) from public."ArtifyRequest" where '{today - timedelta(days=3)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=2)} 15:00:00';''')
+art_count_4 = query_postgreSQL(f'''select count(*) from public."ArtifyRequest" where '{today - timedelta(days=4)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=3)} 15:00:00';''')
+art_count_5 = query_postgreSQL(f'''select count(*) from public."ArtifyRequest" where '{today - timedelta(days=5)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=4)} 15:00:00';''')
+art_count_6 = query_postgreSQL(f'''select count(*) from public."ArtifyRequest" where '{today - timedelta(days=6)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=5)} 15:00:00';''')
+
+src_count_0 = query_postgreSQL(f'''select count(*) from public."IconSearchRequest" where '{today} 15:00:00' < "timestamp" and "timestamp" < '{today + timedelta(days=1)} 15:00:00';''')
+src_count_1 = query_postgreSQL(f'''select count(*) from public."IconSearchRequest" where '{today - timedelta(days=1)} 15:00:00' < "timestamp" and "timestamp" < '{today} 15:00:00';''')
+src_count_2 = query_postgreSQL(f'''select count(*) from public."IconSearchRequest" where '{today - timedelta(days=2)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=1)} 15:00:00';''')
+src_count_3 = query_postgreSQL(f'''select count(*) from public."IconSearchRequest" where '{today - timedelta(days=3)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=2)} 15:00:00';''')
+src_count_4 = query_postgreSQL(f'''select count(*) from public."IconSearchRequest" where '{today - timedelta(days=4)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=3)} 15:00:00';''')
+src_count_5 = query_postgreSQL(f'''select count(*) from public."IconSearchRequest" where '{today - timedelta(days=5)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=4)} 15:00:00';''')
+src_count_6 = query_postgreSQL(f'''select count(*) from public."IconSearchRequest" where '{today - timedelta(days=6)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=5)} 15:00:00';''')
+
+evn_count_0 = query_postgreSQL2(f'''select count(*) from public."BgArtifyRequest" where '{today} 15:00:00' < "timestamp" and "timestamp" < '{today + timedelta(days=1)} 15:00:00';''')
+evn_count_1 = query_postgreSQL2(f'''select count(*) from public."BgArtifyRequest" where '{today - timedelta(days=1)} 15:00:00' < "timestamp" and "timestamp" < '{today} 15:00:00';''')
+evn_count_2 = query_postgreSQL2(f'''select count(*) from public."BgArtifyRequest" where '{today - timedelta(days=2)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=1)} 15:00:00';''')
+evn_count_3 = query_postgreSQL2(f'''select count(*) from public."BgArtifyRequest" where '{today - timedelta(days=3)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=2)} 15:00:00';''')
+evn_count_4 = query_postgreSQL2(f'''select count(*) from public."BgArtifyRequest" where '{today - timedelta(days=4)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=3)} 15:00:00';''')
+evn_count_5 = query_postgreSQL2(f'''select count(*) from public."BgArtifyRequest" where '{today - timedelta(days=5)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=4)} 15:00:00';''')
+evn_count_6 = query_postgreSQL2(f'''select count(*) from public."BgArtifyRequest" where '{today - timedelta(days=6)} 15:00:00' < "timestamp" and "timestamp" < '{today - timedelta(days=5)} 15:00:00';''')
+
+day_count_0 = gen_count_0['count'][0] + art_count_0['count'][0] + src_count_0['count'][0] + evn_count_0['count'][0]
+day_count_1 = gen_count_1['count'][0] + art_count_1['count'][0] + src_count_1['count'][0] + evn_count_1['count'][0]
+day_count_2 = gen_count_2['count'][0] + art_count_2['count'][0] + src_count_2['count'][0] + evn_count_2['count'][0]
+day_count_3 = gen_count_3['count'][0] + art_count_3['count'][0] + src_count_3['count'][0] + evn_count_3['count'][0]
+day_count_4 = gen_count_4['count'][0] + art_count_4['count'][0] + src_count_4['count'][0] + evn_count_4['count'][0]
+day_count_5 = gen_count_5['count'][0] + art_count_5['count'][0] + src_count_5['count'][0] + evn_count_5['count'][0]
+day_count_6 = gen_count_6['count'][0] + art_count_6['count'][0] + src_count_6['count'][0] + evn_count_6['count'][0]
+
+labels_day = [str(today- timedelta(days=6)), str(today - timedelta(days=5)), str(today - timedelta(days=4)), str(today - timedelta(days=3))
+                , str(today- timedelta(days=2)), str(today - timedelta(days=1)), str(today)+'\nTODAY']
+sizes_day = [day_count_6,day_count_5, day_count_4, day_count_3, day_count_2, day_count_1, day_count_0]
+
+fig_day, ax_day = plt.subplots()
+plt.title('Total Activity Counts per Day')
+plt.plot(labels_day, sizes_day, marker='o')
+ax_day.spines['right'].set_visible(False)
+ax_day.spines['top'].set_visible(False)
+ax_day.spines['left'].set_visible(False)
+ax_day.get_yaxis().set_visible(False)
+for i in range(len(labels_day)):
+    height = sizes_day[i]
+    plt.text(labels_day[i], height + 5, '%.0f' %height, ha='center', va='bottom', size = 12)
+col0_1.pyplot(fig_day)
+
+col0_2.header(f'Total Users : {len(user_df)} (before the event 89(14))')
+col0_2.text(f'.\n\n\n\n\n\n\n\nToday Activities: {day_count_0}')
+
+fig_day.savefig(f'Total Activity Counts per Day {dd.year}-{dd.month}-{dd.day}.png')
+with open(f'Total Activity Counts per Day {dd.year}-{dd.month}-{dd.day}.png', "rb") as file:
+    btn = col0_2.download_button(
+            label="Download image",
+            data=file,
+            file_name=f'Total Activity Counts per Day {dd.year}-{dd.month}-{dd.day}.png',
+            mime="image/png"
+        )
+
+col0_2.text(f'.\n\n\n\n\nTotal Activities : {total_num_queries} \nTotal Generation : {len(generation_df)} \nTotal Artify : {len(artify_df)} \nTotal Search : {len(search_df)} \nTotal Event : {len(event_df)}')
+
 #accumulated counts of generation query
-today = date.today()
 diff = (today.weekday() - 5) % 7
 last_sat = today - timedelta(days=diff)
 
