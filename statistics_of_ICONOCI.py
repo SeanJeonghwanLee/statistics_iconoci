@@ -14,10 +14,6 @@ if platform.system() == 'Darwin': #맥
 elif platform.system() == 'Windows': #윈도우
         plt.rc('font', family='Malgun Gothic') 
 elif platform.system() == 'Linux': #리눅스 (구글 콜랩)
-        #!wget "https://www.wfonts.com/download/data/2016/06/13/malgun-gothic/malgun.ttf"
-        #!mv malgun.ttf /usr/share/fonts/truetype/
-        #import matplotlib.font_manager as fm 
-        #fm._rebuild() 
         plt.rc('font', family='Malgun Gothic') 
 plt.rcParams['axes.unicode_minus'] = False
 
@@ -115,8 +111,8 @@ day_count_4 = gen_count_4['count'][0] + art_count_4['count'][0] + src_count_4['c
 day_count_5 = gen_count_5['count'][0] + art_count_5['count'][0] + src_count_5['count'][0] + evn_count_5['count'][0]
 day_count_6 = gen_count_6['count'][0] + art_count_6['count'][0] + src_count_6['count'][0] + evn_count_6['count'][0]
 
-labels_day = [str(today- timedelta(days=6)), str(today - timedelta(days=5)), str(today - timedelta(days=4)), str(today - timedelta(days=3))
-                , str(today- timedelta(days=2)), str(today - timedelta(days=1)), str(today)+'\nTODAY']
+labels_day = [str(today - timedelta(days=5)), str(today - timedelta(days=4)), str(today - timedelta(days=3))
+                , str(today- timedelta(days=2)), str(today - timedelta(days=1)), str(today), str(today + timedelta(days=1))+'\nTODAY']
 sizes_day = [day_count_6,day_count_5, day_count_4, day_count_3, day_count_2, day_count_1, day_count_0]
 
 fig_day, ax_day = plt.subplots()
